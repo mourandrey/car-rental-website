@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Luxury Wheels</title>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+    <!--Folha de estilo-->
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+</head>
+<!-- Barra de navegação que será usada em todas as páginas para navegabilidade mais rápida -->
+<body class="bg-login">
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='logo1.png') }}" alt="Luxury Wheels" height="40"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('home') }}">Início
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('carros') }}">Carros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('minhas_reservas') }}">Minhas Reservas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('contactos') }}">Contactos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <main class="container p-4 text-center">
+        <img src="{{ url_for('static', filename='logo1.png') }}" height="80" class="mb-3">
+        <h1 class="display-4 text-center mt-4 titulo">Luxury Wheels</h1>
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+        <form action="{{ url_for('login') }}" method="POST">
+            {% if erro %} <!-- Mensagem de erro caso email ou senha esteja(m) incorreto(s) -->
+            <div class="alert alert-danger mt-3">{{ erro }}</div>
+            {% endif %}
+            <!-- Formulário Bootswatch para introduzir email e senha, com botão de entrada e de registo -->
+            <div class="text-start">
+                <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+                <input type="email" class="form-control" name ="email" id="exampleInputEmail1" placeholder="Inserir email" required>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="text-start">
+                <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+                <input type="password" class="form-control" name="senha" id="exampleInputPassword1" placeholder="Inserir senha" required>
+
+            <p> <a href="{{ url_for('register') }}" class="btn btn-link">Registar-se</a> </p>
+            <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+            </div>
+        </form>
+        </div>
+        </div>
+    </main>
+</body>
+</html>

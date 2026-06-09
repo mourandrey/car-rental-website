@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Reservas</title>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+    <!--Folha de estilo-->
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+</head>
+<!-- Barra de navegação que será usada em todas as páginas para navegabilidade mais rápida -->
+<body class="bg-minhas_reservas">
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='logo1.png') }}" alt="Luxury Wheels" height="40"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('home') }}">Início
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('carros') }}">Carros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('minhas_reservas') }}">Minhas Reservas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('contactos') }}">Contactos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<main class="container mt-5">
+    <h1 class="text-center mb-4">Minhas Reservas</h1>
+    <!-- Caso haja reserva, mostra e permite editar ou cancelar -->
+    {% if reservas %}
+        {% for reserva in reservas %}
+        <div class="card mb-3 p-3">
+            <p>Carro: {{ reserva.carro_marca }} {{ reserva.carro_modelo }}</p>
+            <p>Data de início: {{ reserva.data_inicio }}</p>
+            <p>Data final: {{ reserva.data_fim }}</p>
+            <p>Valor total: €{{ reserva.valor_total }}</p>
+            <p>Status: {{ reserva.status }}</p>
+
+            <div class="d-flex gap-2">
+                <a href="{{ url_for('minhas_reservas', editar_id=reserva.id) }}" class="btn btn-outline-warning">Editar</a>
+                <!-- Botão para editar -->
+                <form method="POST" action="{{ url_for('cancelar_reserva') }}">
+                    <input type="hidden" name="reserva_id" value="{{ reserva.id }}">
+                    <button type="submit" class="btn btn-outline-warning">Cancelar</button>
+                </form>
+            </div>
+            {% if editar_id == reserva.id %}
+            <form method="POST" action="{{ url_for('salvar_edicao') }}" class="mt-3">
+                <input type="hidden" name="reserva_id" value="{{ reserva.id }}">
+                <div class="mb-2">
+                    <label>Nova data de início:</label>
+                    <input type="date" name="data_inicio" class="form-control" value="{{ reserva.data_inicio }}">
+                </div>
+                <div class="mb-2">
+                    <label>Nova data final:</label>
+                    <input type="date" name="data_fim" class="form-control" value="{{ reserva.data_fim }}">
+                </div>
+                <button class="btn btn-outline-success">Guardar alterações</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info text-center">
+            Você ainda não possui reserva.
+        </div>
+    {% endif %}
+
+</main>
+</body>
+</html>

@@ -1,0 +1,33 @@
+.titulo {
+  font-family: "Google Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "GRAD" 0;
+}
+
+.bg-login {
+    background: #833AB4;
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(235, 0, 0, 1) 0%, rgba(252, 176, 69, 1) 100%);
+}
+
+.bg-register {
+    background: #833AB4;
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(235, 0, 0, 1) 0%, rgba(252, 176, 69, 1) 100%);
+}
+
+.bg-carros {
+    background: #258085;
+    background: linear-gradient(90deg, rgba(37, 128, 133, 1) 0%, rgba(14, 237, 155, 1) 0%, rgba(0, 212, 255, 1) 100%);
+}
+
+.bg-reservas {
+    background: #EEAECA;
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+.bg-minhas_reservas {
+    background: #3bf7f7;
+    background: radial-gradient(circle, rgba(59, 247, 247, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
