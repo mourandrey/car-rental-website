@@ -1,4 +1,4 @@
-# car-rental-website#
+# Car-Rental-Website
 
 A web-based car rental management platform developed using Flask and SQLAlchemy.
 
